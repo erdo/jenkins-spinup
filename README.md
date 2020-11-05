@@ -9,7 +9,7 @@ First clone this repo. All the files we create need to be placed inside the top 
 
 To do this on the command line:
 
-`git clone git@github.com:erdo/jenkins-spinup.git`
+`git clone git@github.com:erdo/jenkins-spinup.git`  
 `cd jenkins-spinup`
 
 
@@ -32,7 +32,7 @@ GITHUB_OAUTHAPP_CLIENT_SECRET=05ag56f38myoauthappclientsecret73fa7765e0
 GITHUB_OAUTHAPP_CLIENT_ID=103myoauthappclientid55be" > jenkins.env`
 
 You can check this worked by typing:
-`ls`
+`ls`  
 `cat jenkins.env`
 
 ## Step 2) Procure a remote linux instance from a cloud provider
