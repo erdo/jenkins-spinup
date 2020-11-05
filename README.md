@@ -19,11 +19,11 @@ There are a few things we need to specify inside the **jenkins.env** file before
 
 Create a file and name it **jenkins.env** then edit the contents of the file so it looks something like this:
 
-`
-GITHUB_ADMIN_USER=mygithubusername
-GITHUB_OAUTHAPP_CLIENT_SECRET=05ag56f38myoauthappclientsecret73fa7765e0
-GITHUB_OAUTHAPP_CLIENT_ID=103myoauthappclientid55be
-`
+
+> GITHUB_ADMIN_USER=mygithubusername
+> GITHUB_OAUTHAPP_CLIENT_SECRET=05ag56f38myoauthappclientsecret73fa7765e0
+> GITHUB_OAUTHAPP_CLIENT_ID=103myoauthappclientid55be
+
 
 To do this on the command line:
 
