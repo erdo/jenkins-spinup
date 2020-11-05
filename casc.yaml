@@ -1,0 +1,65 @@
+#
+# https://www.digitalocean.com/community/tutorials/how-to-automate-jenkins-setup-with-docker-and-jenkins-configuration-as-code
+#
+# configuration-as-code plugin
+jenkins:
+  systemMessage: "Hello, welcome to your stateless Jenkins instance"
+  remotingSecurity: # enabling Agent to Controller Access Control
+    enabled: true
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: false
+  securityRealm:
+    github: # github-oauth plugin
+      clientID: ${GITHUB_OAUTHAPP_CLIENT_ID}
+      clientSecret: ${GITHUB_OAUTHAPP_CLIENT_SECRET}
+      githubApiUri: "https://api.github.com"
+      githubWebUri: "https://github.com"
+      oauthScopes: "read:org"
+  authorizationStrategy: # matrix-auth plugin
+    globalMatrix:
+      permissions:
+        - "Overall/Administer:${GITHUB_ADMIN_USER}"
+        - "Overall/Read:authenticated"
+credentials: # credentials / credentials-binding plugin
+  system:
+    domainCredentials:
+    - credentials:
+      - basicSSHUserPrivateKey:
+          id: git_private_ssh
+          privateKeySource:
+            directEntry:
+              privateKey: ${jenkins_ci_privatesshkey}
+          scope: GLOBAL
+          username: ${GITHUB_ADMIN_USER}
+jobs: # job-dsl plugin
+  - script: >
+      pipelineJob('android') {
+          definition {
+              description('build and test android apps')
+              cpsScm {
+                scm {
+                  git {
+                    remote {
+                      url('git@github.com:erdo/fore-syncview-tutorial.git')
+                      credentials('git_private_ssh')
+                    }
+                    branch "refs/heads/jenkins-test"
+                    scriptPath("Jenkinsfile")
+                  }
+                }
+              }
+          }
+          triggers {
+              cron("H 0 * * *")
+          }
+      }
+security: # authorize-project plugin
+  queueItemAuthenticator:
+    authenticators:
+    - global:
+        strategy: triggeringUsersAuthorizationStrategy
+        credentials:
+unclassified:
+  location:
+    url: ${JENKINS_URL} # location of jenkins instance

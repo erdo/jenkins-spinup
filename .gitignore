@@ -1,0 +1,27 @@
+# Jenkins
+jenkins_home/
+
+# Misc
+.DS_Store
+*.db
+*.hprof
+captures/
+ajcore*.txt
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Keystore files
+*.jks
+*.keystore
+
+# passwords
+*.pem
+*.key.pub
+*.key
+jenkins.env
+secrets.properties
+githubapp-clientsecret.txt
