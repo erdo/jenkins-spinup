@@ -31,7 +31,7 @@ To do this on the command line:
 GITHUB_OAUTHAPP_CLIENT_SECRET=05ag56f38myoauthappclientsecret73fa7765e0
 GITHUB_OAUTHAPP_CLIENT_ID=103myoauthappclientid55be" > jenkins.env`
 
-You can check this worked by typing:
+You can check this worked by typing:  
 `ls`  
 `cat jenkins.env`
 
