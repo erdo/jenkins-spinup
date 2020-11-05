@@ -5,7 +5,7 @@ Use this repo to configure a stateless jenkins instance from scratch on a remote
 
 These instructions (and the scripts in this repo) assume you are using a mac and have a github account for oauth access to jenkins. A basic familiarity with linux commands would be pretty helpful to understand what's going on, maybe briefly research and try out the following commands: `cd, ls, echo, touch, cat, rm, chmod`
 
-First clone this repo, all the files we create, need to be placed inside the top level direcory of the cloned repo (i.e. inside the jenkins-spinup folder)
+First clone this repo. All the files we create need to be placed inside the top level direcory of the cloned repo (i.e. inside the jenkins-spinup folder)
 
 To do this on the command line:
 
@@ -122,15 +122,15 @@ The scripts are heavily commented to help people who aren't familiar with bash s
 
 Don't forget that the spinup process pulls itself from github on to the linux box, so if you make any changes on your mac, you need to commit and push those changes to github before the linux box will see any of the changes.
 
-This causes another complication (mentioned briefly in the Diagnosing problems section) by default the second script clones the repo and continues from the master branch, if you are developing in a feature branch it's probably easiest to uncomment the line in 02_ubuntu.sh below where it says "# switch to feature branch if developing script changes". This way you can test everything works before re-commenting that line and merging into the master branch.
+This causes another complication (mentioned briefly in the Diagnosing problems section) by default the second script clones the repo and continues from the master branch, if you are developing in a feature branch it's probably easiest to uncomment the line in **02_ubuntu.sh** below where it says "# switch to feature branch if developing script changes". This way you can test everything works before re-commenting that line and merging into the master branch.
 
-Aside from the bash scripts, here are some important files you are likey to want to change for your own purposes:
+Aside from the bash scripts, here are some important files you will likely want to change for your own purposes:
 
 - **jenkins-pluggins.txt** - this is just a list of all the pluggins you want pre-installed on your jenkins instance, add whatever you want here
 
 - **casc.yml** - this is the main config file for jenkins configuration as code, you will certainly want to change the seed job and add further seed jobs in the *job-dsl plugin* section, the seed jobs are designed to find further instructions inside a *Jenkinsfile* that should be present in the repository being cloned for the job
 
-- **Dockerfile** - is where you will find the image definition that jenkins run in, we start with a plain alpine linux image with jenkins installed on it and add various things to it, including the android command line tools and android build tools (which you will need change periodically when newer versions become available) the more you add here of course, the larger the final image will be.
+- **Dockerfile** - is where you will find the image definition that jenkins runs in, we start with a plain alpine linux image with jenkins installed on it and add various things to it, including the android command line tools and android build tools (which you will need to change periodically when newer versions become available) the more you add here of course, the larger the final image will be.
 
 Generally I have chosen to always update the latest versions of everything where possible because this makes keeping up with security updates the default - but that of course increases the chance that one day the script will stop working and need to be fixed because an update broke something.
 
@@ -140,6 +140,6 @@ Generally I have chosen to always update the latest versions of everything where
 - I'm not 100% sure that I am using linux users and groups correctly
 - I'm not 100% sure that I am using docker correctly
 - I'm not 100% sure that jobs running in jenkins have no way to access the linux box via environment variables or other
-- The spinup script does not setup HTTPS access to jenkins
+- The spinup script does not set up HTTPS access to jenkins
 - The generated private ssh keys are left on the linux box (not unusual, although they are more usually kept in the .ssh folder)
-- Unkown unknowns (I'm not a professional devops)
+- Unknown unknowns (I'm not a professional devops)
