@@ -3,7 +3,7 @@
 
 Use this repo to configure a stateless jenkins instance from scratch on a remote linux box for building and testing android apps.
 
-These instructions (and the scripts in this repo) assume you are using a mac and have a github account for oauth access to jenkins. A basic familiarity with linux commands would be pretty helpful to understand what's going on, maybe briefly research and try out the following commands: `cd, ls, echo, touch, cat, rm, chmod`
+These instructions (and the scripts in this repo) assume you are using a mac and have a github account for oauth access to jenkins. A basic familiarity with linux commands would be pretty helpful to understand what's going on, maybe briefly research and try out the following commands: **cd, ls, echo, touch, cat, rm, chmod**
 
 First clone this repo. All the files we create need to be placed inside the top level direcory of the cloned repo (i.e. inside the jenkins-spinup folder)
 
