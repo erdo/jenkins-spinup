@@ -56,6 +56,26 @@ some help setting this up on DigitalOcean:
 https://www.youtube.com/watch?v=-exFANqwlPM
 
 
+
+### Locally using Multipass
+
+For running private tests and development, a local ubuntu instance is very handy, and multipass can give you multiple free local ubuntu instances.
+
+download and install it: https://multipass.run/  
+
+create your own key pair: `echo | ssh-keygen -t rsa -b 4096 -C "ssh key pair, mac to linux box" -f "linuxbox_ssh.key" -P '';`  
+
+create an ubuntu instance: `multipass launch --name furry-packet` (you can omit the name and multipass will choose one for you)
+
+view ip address: `multipass list`
+
+push public key to ubuntu instance (note the backtick: \`, not \' ):
+<code>multipass exec furry-packet -- bash -c "echo \`cat ../config/linuxbox_ssh.key.pub\` >> ~/.ssh/authorized_keys"</code>
+
+test ssh access: `ssh -v -i ../config/linuxbox_ssh.key ubuntu@xx.xx.xx.xx`
+
+
+
 ## Step 3) Run the setup script
 
 The setup script(s) do a number of things, including transfering the jenkins.env file to our remote linux box, applying security updates, setting up various ssh key pairs, installing and configuring Docker and Jenkins.
@@ -94,7 +114,7 @@ For each case the script needs to create an ssh key pair (a private key file, an
 - We leave the private key on the remote linux box (it's good practice not to move private keys around, if you need it somewhere else, just delete it and create a new one where you need it)
 - And we copy and paste the text from the corresponding public key file into github via github's web UI (it doesn't matter so much who has the public key, in this case it lets github confirm who it is talking to: the owner of private key)
 
-The script handles everything for you except the copying and pasting bit, which it will prompt you to do. 
+The script handles everything for you except the copying and pasting bit, which it will prompt you to do.
 
 ## Diagnosing problems
 
